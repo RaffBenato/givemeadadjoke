@@ -2,6 +2,7 @@ const joke = document.querySelector(".joke");
 const search = document.querySelector(".search");
 const btnRandomEl = document.querySelector(".btnRandom");
 const btnSearchEl = document.querySelector(".btnSearch");
+const inputSearchEl = document.querySelector(".inputSearch");
 const btnGoEl = document.querySelector(".btnGo");
 
 btnRandomEl.addEventListener("click", function () {
@@ -27,7 +28,21 @@ btnSearchEl.addEventListener("click", function () {
 });
 
 btnGoEl.addEventListener("click", function () {
-  joke.classList.remove("hidden");
+  if (inputSearchEl.value !== "") {
+    fetch(`https://icanhazdadjoke.com/search?term=${inputSearchEl.value}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "github.com/raffbenato",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        joke.textContent = data.results[0].joke;
+
+        joke.classList.remove("hidden");
+      });
+  }
 });
 
 const jimbo = document.querySelector(".jimbo");
