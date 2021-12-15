@@ -29,3 +29,9 @@ btnSearchEl.addEventListener("click", function () {
 btnGoEl.addEventListener("click", function () {
   joke.classList.remove("hidden");
 });
+
+const jimbo = document.querySelector(".jimbo");
+jimbo.addEventListener("click", function () {
+  joke.textContent = "Jimbo is a little girl";
+  joke.classList.remove("hidden");
+});
