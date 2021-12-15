@@ -5,8 +5,20 @@ const btnSearchEl = document.querySelector(".btnSearch");
 const btnGoEl = document.querySelector(".btnGo");
 
 btnRandomEl.addEventListener("click", function () {
-  joke.classList.remove("hidden");
-  search.classList.add("hidden");
+  fetch("https://icanhazdadjoke.com/", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "User-Agent": "github.com/raffbenato",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      joke.textContent = data.joke;
+
+      search.classList.add("hidden");
+      joke.classList.remove("hidden");
+    });
 });
 
 btnSearchEl.addEventListener("click", function () {
