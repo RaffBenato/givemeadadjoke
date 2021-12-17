@@ -39,13 +39,14 @@ btnGoEl.addEventListener("click", function () {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-
         if (data.total_jokes > 0) {
           const randomJoke = Math.floor(Math.random() * data.total_jokes);
-          console.log(randomJoke);
 
           joke.textContent = data.results[randomJoke].joke;
+
+          joke.classList.remove("hidden");
+        } else {
+          joke.textContent = `Sorry, I don't know that one.`;
 
           joke.classList.remove("hidden");
         }
