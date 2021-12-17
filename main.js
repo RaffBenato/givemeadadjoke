@@ -25,6 +25,7 @@ btnRandomEl.addEventListener("click", function () {
 btnSearchEl.addEventListener("click", function () {
   search.classList.remove("hidden");
   joke.classList.add("hidden");
+  inputSearchEl.value = ``;
 });
 
 btnGoEl.addEventListener("click", function () {
@@ -38,9 +39,16 @@ btnGoEl.addEventListener("click", function () {
     })
       .then((res) => res.json())
       .then((data) => {
-        joke.textContent = data.results[0].joke;
+        console.log(data);
 
-        joke.classList.remove("hidden");
+        if (data.total_jokes > 0) {
+          const randomJoke = Math.floor(Math.random() * data.total_jokes);
+          console.log(randomJoke);
+
+          joke.textContent = data.results[randomJoke].joke;
+
+          joke.classList.remove("hidden");
+        }
       });
   }
 });
